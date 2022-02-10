@@ -53,7 +53,7 @@
 <link rel=icon type=image/png sizes=16x16 href=/favicon/favicon-16x16.png>
 <meta name=msapplication-TileColor content="#ffffff">
 <meta name=msapplication-TileImage content="/ms-icon-144x144.png">
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"kubernetes系列文章","datePublished":"2022-02-08T15:46:39+08:00","dateModified":"2022-02-08T15:46:39+08:00","url":"https://ibora.evcoder.com/posts/%E7%B3%BB%E5%88%97kubernetes%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/","description":"kubernetes简介 kubernetes系列博客列表 ","keywords":["系列"],"image":"https://image.evcoder.com/image/hugo/blog/kubernetes-96.png","author":{"@type":"Person","name":"ender viggin"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://ibora.evcoder.com"},"publisher":{"@type":"Organization","name":"IBORA","url":"https://ibora.evcoder.com"}}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"WebPage","headline":"kubernetes系列文章","datePublished":"2022-02-08T15:46:39+08:00","dateModified":"2022-02-08T15:46:39+08:00","url":"https://ibora.evcoder.com/posts/%E7%B3%BB%E5%88%97kubernetes%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/","description":"kubernetes简介 Kubernetes 是一个可移植的、可扩展的开源平台，用于管理容器化的工作负载和服务，可促进声明式配置和自动化。 Kubernetes 拥有一个庞大且快速增长的生态系统。Kubernetes 的服务、支持和工具广泛可用。该项目托管在CNCF。 Kubernetes 这个名字源于希腊语，意为“舵手”或“飞行 …","keywords":["系列"],"image":"https://image.evcoder.com/image/hugo/blog/kubernetes-96.png","author":{"@type":"Person","name":"ender viggin"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://ibora.evcoder.com"},"publisher":{"@type":"Organization","name":"IBORA","url":"https://ibora.evcoder.com"}}</script>
 <script async src=https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
 </head>
 <body id=root class=theme__dark>
@@ -197,7 +197,123 @@ light
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
 <h2 id=kubernetes简介>kubernetes简介</h2>
+<p>Kubernetes 是一个可移植的、可扩展的开源平台，用于管理容器化的工作负载和服务，可促进声明式配置和自动化。 Kubernetes 拥有一个庞大且快速增长的生态系统。Kubernetes 的服务、支持和工具广泛可用。该项目托管在<a href=https://www.cncf.io/>CNCF</a>。</p>
+<p><strong>Kubernetes</strong> 这个名字源于希腊语，意为“舵手”或“飞行员”。k8s 这个缩写是因为 k 和 s 之间有八个字符的关系。 Google 在 2014 年开源了 Kubernetes 项目。是 Google 多年大规模容器管理技术 Borg 的开源版本，结合了社区中最好的想法和实践。</p>
+<p><strong>kubernetes功能</strong>：</p>
+<ul>
+<li>
+<p><strong>服务发现和负载均衡</strong></p>
+<p>Kubernetes 可以使用 DNS 名称或自己的 IP 地址公开容器，如果进入容器的流量很大， Kubernetes 可以负载均衡并分配网络流量，从而使部署稳定。</p>
+</li>
+<li>
+<p><strong>存储编排</strong></p>
+<p>Kubernetes 允许你自动挂载你选择的存储系统，例如本地存储、公共云提供商等。</p>
+</li>
+<li>
+<p><strong>自动部署和回滚</strong></p>
+<p>你可以使用 Kubernetes 描述已部署容器的所需状态，它可以以受控的速率将实际状态 更改为期望状态。例如，你可以自动化 Kubernetes 来为你的部署创建新容器， 删除现有容器并将它们的所有资源用于新容器。</p>
+</li>
+<li>
+<p><strong>自动完成装箱计算</strong></p>
+<p>Kubernetes 允许你指定每个容器所需 CPU 和内存（RAM）。 当容器指定了资源请求时，Kubernetes 可以做出更好的决策来管理容器的资源。</p>
+</li>
+<li>
+<p><strong>自我修复</strong></p>
+<p>Kubernetes 重新启动失败的容器、替换容器、杀死不响应用户定义的 运行状况检查的容器，并且在准备好服务之前不将其通告给客户端。</p>
+</li>
+<li>
+<p><strong>密钥与配置管理</strong></p>
+<p>Kubernetes 允许你存储和管理敏感信息，例如密码、OAuth 令牌和 ssh 密钥。 你可以在不重建容器镜像的情况下部署和更新密钥和应用程序配置，也无需在堆栈配置中暴露密钥。</p>
+</li>
+</ul>
 <h2 id=kubernetes系列博客列表>kubernetes系列博客列表</h2>
+<ul>
+<li>
+<p><strong>kubernetes部署</strong></p>
+<ul>
+<li><strong>minikube安装kubernetes集群</strong></li>
+<li><strong>kind安装kubernetes集群</strong></li>
+<li><strong>kubeadm安装kubernetes集群</strong></li>
+<li><strong>kubespray安装kubernetes集群</strong></li>
+<li><strong>sealos安装kubernetes集群</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>kubernetes管理工具</strong></p>
+<ul>
+<li><strong>rancher</strong>
+<ul>
+<li><strong>rancher部署文档</strong></li>
+</ul>
+</li>
+<li><strong>kubesphere</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>kubernetes架构</strong></p>
+</li>
+<li>
+<p><strong>kubernetes核心组件</strong></p>
+<ul>
+<li><strong>etcd</strong></li>
+<li><strong>kube-apiserver</strong></li>
+<li><strong>kube-scheduler</strong></li>
+<li><strong>kube-controller-manager</strong></li>
+<li><strong>kubelet</strong></li>
+<li><strong>kube-proxy</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>kubernetes附加组件</strong></p>
+<ul>
+<li><strong>CoreDns</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>kubernetes网络插件</strong></p>
+<ul>
+<li><strong>CNI</strong></li>
+<li><strong>flannel</strong></li>
+<li><strong>calico</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>kubernetes资源对象</strong></p>
+<ul>
+<li><strong>kubernetes CustomResourceDefinition详解</strong></li>
+<li><strong>kubernetes ConfigMap详解</strong></li>
+<li><strong>kubernetes CronJob详解</strong></li>
+<li><strong>kubernetes DaemonSet详解</strong></li>
+<li><strong>kubernetes Deployment详解</strong></li>
+<li><strong>kubernetes Ingress详解</strong></li>
+<li><strong>kubernetes Job详解</strong></li>
+<li><strong>kubernetes LocalValume详解</strong></li>
+<li><strong>kubernetes Namespace详解</strong></li>
+<li><strong>kubernetes NetworkPolicy详解</strong></li>
+<li><strong>kubernetes Node详解</strong></li>
+<li><strong>kubernetes PersistentVolume详解</strong></li>
+<li><strong>kubernetes Pod详解</strong></li>
+<li><strong>kubernetes PodPreset详解</strong></li>
+<li><strong>kubernetes RelicaSet详解</strong></li>
+<li><strong>kubernetes Quota详解</strong></li>
+<li><strong>kubernetes Secret详解</strong></li>
+<li><strong>kubernetes SecurityContext详解</strong></li>
+<li><strong>kubernetes Service详解</strong></li>
+<li><strong>kubernetes ServiceAccount详解</strong></li>
+<li><strong>kubernetes StatefulSet详解</strong></li>
+<li><strong>kubernetes Volume详解</strong></li>
+</ul>
+</li>
+<li>
+<p><strong>kubernetes命令行工具</strong></p>
+<ul>
+<li><strong>kubectl命令详解</strong></li>
+<li><strong>kubectx命令详解</strong></li>
+<li><strong>kubens命令详解</strong></li>
+<li><strong>kubecm命令详解</strong></li>
+</ul>
+</li>
+</ul>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
