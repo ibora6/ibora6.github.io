@@ -260,53 +260,45 @@ openstack gitHub: <a href=https://github.com/openstack>https://github.com/openst
 </tr>
 </tbody>
 </table>
-<h4 id=keystone>keystone</h4>
-<p>为OpenStack其它组件成员提供统一的认证服务，包括身份验证，令牌发放和校验，服务列表，用户权限定义等。</p>
-<p><strong>基本概念</strong></p>
-<ul>
-<li>
-<p><strong>user</strong></p>
-<p>用户,代表可以通过keystone进行访问的人或程序。Users通过认证信息进行验证。</p>
-</li>
-<li>
-<p><strong>tenant</strong></p>
-<p>租户，是各个服务中的一些可以访问的资源集合。Users总是绑定到某些tenant上。</p>
-</li>
-<li>
-<p><strong>role</strong></p>
-<p>角色，代表一组用户可以访问的资源权限</p>
-</li>
-<li>
-<p><strong>service</strong></p>
-<p>服务，如Nova、Glance、Swift。</p>
-</li>
-<li>
-<p><strong>endpoint</strong></p>
-<p>服务的URL路径，暴露出来的访问点。</p>
-</li>
-<li>
-<p><strong>domain</strong></p>
-<p>定义管理边界，可以包含多个project,user,role。</p>
-</li>
-<li>
-<p><strong>token</strong></p>
-<p>Token是访问资源的密钥。</p>
-</li>
-<li>
-<p><strong>policy</strong></p>
-<p>Policy机制就是用来控制User对Tenant中资源的操作权限。</p>
-</li>
-<li>
-<p><strong>credentials</strong></p>
-<p>用于确认用户身份的凭证。</p>
-</li>
-</ul>
-<h4 id=nova>nova</h4>
-<h4 id=cinder>cinder</h4>
 <h2 id=openstack系列博客列表>openstack系列博客列表</h2>
+<ul>
+<li>openstack部署
 <ul>
 <li><a href=http://localhost:1313/posts/openstackopenstack%E9%83%A8%E7%BD%B2%E6%96%87%E6%A1%A3/>Openstack部署文档</a></li>
 <li><a href=http://localhost:1313/posts/openstackkolla%E9%83%A8%E7%BD%B2openstack%E6%96%87%E6%A1%A3/>kolla部署openstack文档</a></li>
+</ul>
+</li>
+<li>openstack组件
+<ul>
+<li>horizon组件详解</li>
+<li>nova组件详解</li>
+<li>neutron组件详解</li>
+<li>swift组件详解</li>
+<li>cinder组件详解</li>
+<li>keystone组件详解</li>
+<li>glance组件详解</li>
+<li>ceilometer组件详解</li>
+<li>heat组件详解</li>
+</ul>
+</li>
+<li>openstack仪表盘</li>
+<li>openstack命令行客户端
+<ul>
+<li>openstack命令行客户端安装</li>
+<li>openstack命令行管理镜像</li>
+<li>openstack命令行管理卷</li>
+<li>openstack命令行管理共享</li>
+<li>openstack命令行设定实例的权限和安全设置</li>
+<li>openstack命令行启动云主机</li>
+<li>openstack命令行管理实例和主机</li>
+<li>openstack命令行为实例提供用户数据</li>
+<li>openstack命令行使用快照来迁移实例</li>
+<li>openstack命令行在配置驱动上存储元数据</li>
+<li>openstack命令行创建和管理网路</li>
+<li>openstack命令行创建和管理栈</li>
+</ul>
+</li>
+<li>openstack python SDK</li>
 </ul>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
@@ -444,13 +436,7 @@ openstack gitHub: <a href=https://github.com/openstack>https://github.com/openst
 <ul>
 <li><a href=#openstack简介>openstack简介</a>
 <ul>
-<li><a href=#openstack组件>openstack组件</a>
-<ul>
-<li><a href=#keystone>keystone</a></li>
-<li><a href=#nova>nova</a></li>
-<li><a href=#cinder>cinder</a></li>
-</ul>
-</li>
+<li><a href=#openstack组件>openstack组件</a></li>
 </ul>
 </li>
 <li><a href=#openstack系列博客列表>openstack系列博客列表</a></li>

@@ -202,6 +202,157 @@ light
 </blockquote>
 <h2 id=1-all-in-one模式>1. all-in-one模式</h2>
 <h2 id=2-multinode模式>2. Multinode模式</h2>
+<h3 id=主机配置规划>主机配置规划</h3>
+<table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>网口（nat/bridge）</th>
+<th>cpu</th>
+<th>内存</th>
+<th>磁盘</th>
+<th>系统</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kolla-controller</td>
+<td>10.0.0.10/</td>
+<td>4c</td>
+<td>8G</td>
+<td>40G</td>
+<td>ubuntu20.04</td>
+</tr>
+<tr>
+<td>kolla-compute01</td>
+<td>10.0.0.11/</td>
+<td>4c</td>
+<td>8G</td>
+<td>30G</td>
+<td>ubuntu20.04</td>
+</tr>
+<tr>
+<td>kolla-compute02</td>
+<td>10.0.0.12/</td>
+<td>4c</td>
+<td>8G</td>
+<td>30G</td>
+<td>ubuntu20.04</td>
+</tr>
+<tr>
+<td>kolla-compute03</td>
+<td>10.0.0.13/</td>
+<td>4c</td>
+<td>8G</td>
+<td>30G</td>
+<td>ubuntu20.04</td>
+</tr>
+<tr>
+<td>kolla-storage</td>
+<td>10.0.0.14/</td>
+<td>2c</td>
+<td>4G</td>
+<td>500G</td>
+<td>ubuntu20.04</td>
+</tr>
+</tbody>
+</table>
+<h3 id=初始化环境配置>初始化环境配置</h3>
+<h4 id=1替换镜像源>1.替换镜像源</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 首先备份源列表--ubuntu20.04</span>
+sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
+vim /etc/apt/sources.list
+<span class=c1># 添加ubuntu20.04的配置</span>
+https://developer.aliyun.com/mirror/ubuntu?spm<span class=o>=</span>a2c6h.13651102.0.0.3e221b1176Cuex
+
+sudo apt upate
+sudo apt upgrade
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=2安装依赖包>2.安装依赖包</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>apt-get install python-dev libffi-dev gcc libssl-dev python-selinux python-setuptools git vim -y
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=3安装ansible>3.安装ansible</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>sudo apt install ansible
+
+<span class=c1># 配置ansible</span>
+vim /etc/ansible/ansible.cfg
+<span class=o>[</span>defaults<span class=o>]</span>
+<span class=nv>host_key_checking</span><span class=o>=</span>False
+<span class=nv>pipelining</span><span class=o>=</span>True
+<span class=nv>forks</span><span class=o>=</span><span class=m>100</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=4安装kolla-ansible>4.安装kolla-ansible</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 下载安装包</span>
+git clone --branch stable/xena https://opendev.org/openstack/kolla-ansible
+sudo pip3 install ./kolla-ansible
+<span class=c1># 创建kolla配置文件目录</span>
+sudo mkdir -p /etc/kolla
+sudo chown <span class=nv>$USER</span>:<span class=nv>$USER</span> /etc/kolla
+
+cp -r kolla-ansible/etc/kolla/* /etc/kolla
+cp kolla-ansible/ansible/inventory/* .
+</code></pre></td></tr></table>
+</div>
+</div><h4 id=5修改配置文件>5.修改配置文件</h4>
+<h4 id=6检查库文件配置是否正确>6.检查库文件配置是否正确</h4>
+<pre tabindex=0><code>ansible -i multinode all -m ping
+</code></pre><h4 id=7生成密码>7.生成密码</h4>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=nb>cd</span> kolla-ansible/tools
+./generate_passwords.py
+</code></pre></td></tr></table>
+</div>
+</div>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -334,7 +485,22 @@ light
 <nav id=TableOfContents>
 <ul>
 <li><a href=#1-all-in-one模式>1. all-in-one模式</a></li>
-<li><a href=#2-multinode模式>2. Multinode模式</a></li>
+<li><a href=#2-multinode模式>2. Multinode模式</a>
+<ul>
+<li><a href=#主机配置规划>主机配置规划</a></li>
+<li><a href=#初始化环境配置>初始化环境配置</a>
+<ul>
+<li><a href=#1替换镜像源>1.替换镜像源</a></li>
+<li><a href=#2安装依赖包>2.安装依赖包</a></li>
+<li><a href=#3安装ansible>3.安装ansible</a></li>
+<li><a href=#4安装kolla-ansible>4.安装kolla-ansible</a></li>
+<li><a href=#5修改配置文件>5.修改配置文件</a></li>
+<li><a href=#6检查库文件配置是否正确>6.检查库文件配置是否正确</a></li>
+<li><a href=#7生成密码>7.生成密码</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </nav>
 </div>
