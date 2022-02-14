@@ -30,7 +30,7 @@
 <meta name=twitter:app:name:iphone content="IBORA">
 <meta property="twitter:title" content="kubectl命令详解">
 <meta property="twitter:description" content="Kubectl 命令行工具管理 Kubernetes 集群">
-<meta name=generator content="Hugo 0.92.1">
+<meta name=generator content="Hugo 0.92.2">
 <meta name=msapplication-TileColor content="#fff">
 <meta name=theme-color content="#fff">
 <meta name=msapplication-navbutton-color content="#fff">
@@ -472,6 +472,11 @@ metadata.name metadata.resourceVersion
 </blockquote>
 <h3 id=常用操作指南>常用操作指南</h3>
 <ul>
+<li>
+<p><strong>批量删除</strong></p>
+<pre tabindex=0><code># 批量删除状态为Terminating的pod
+kubectl get pod -A | awk '{if($4==&quot;Terminating&quot;){cmd=&quot;kubectl -n &quot;$1&quot; delete pod &quot;$2; system(cmd)}}'
+</code></pre></li>
 <li>
 <p><strong>平滑移除节点</strong></p>
 <div class=highlight><div class=chroma>
