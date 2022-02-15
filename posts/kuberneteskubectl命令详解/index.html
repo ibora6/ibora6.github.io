@@ -474,9 +474,32 @@ metadata.name metadata.resourceVersion
 <ul>
 <li>
 <p><strong>批量删除</strong></p>
-<pre tabindex=0><code># 批量删除状态为Terminating的pod
-kubectl get pod -A | awk '{if($4==&quot;Terminating&quot;){cmd=&quot;kubectl -n &quot;$1&quot; delete pod &quot;$2; system(cmd)}}'
-</code></pre></li>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=c1># 批量删除状态为Terminating的pod</span>
+kubectl get pod -A <span class=p>|</span> awk <span class=s1>&#39;{if($4==&#34;Terminating&#34;){cmd=&#34;kubectl -n &#34;$1&#34; delete pod &#34;$2; system(cmd)}}&#39;</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>端口转发</strong></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>kubectl port-forward svc/<span class=nv>$service_name</span>  <span class=nv>$local_port</span>:<span class=nv>$pod_port</span> --address 0.0.0.0
+<span class=c1># 示例</span>
+k port-forward service/minio  29001:9001 -n minio --address 0.0.0.0 <span class=c1># 127.0.0.1:29001</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
 <li>
 <p><strong>平滑移除节点</strong></p>
 <div class=highlight><div class=chroma>

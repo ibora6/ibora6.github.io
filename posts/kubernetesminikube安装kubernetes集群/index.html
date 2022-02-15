@@ -240,7 +240,7 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 <pre tabindex=0 class=chroma><code><span class=lnt>1
 </span></code></pre></td>
 <td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>minikube start
+<pre tabindex=0 class=chroma><code class=language-shell data-lang=shell>minikube start --kubernetes-version<span class=o>=</span>latest --memory<span class=o>=</span>8192mb --cpus<span class=o>=</span><span class=m>4</span> --container-runtime<span class=o>=</span><span class=s1>&#39;containerd&#39;</span>
 </code></pre></td></tr></table>
 </div>
 </div><p><strong>启动参数</strong></p>
@@ -249,7 +249,9 @@ sudo install minikube-linux-amd64 /usr/local/bin/minikube
 <li><code>--image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers</code>: 指定镜像源，这里设置的是阿里云</li>
 <li><code>--kubernetes-version=latest</code>: k8s版本,如果指定latest则安装最新版</li>
 <li><code>--vm-driver=none</code>: 不创建虚拟机</li>
-<li><code>--memory=2048mb</code>: 指定使用多大内存</li>
+<li><code>--memory=8192mb</code>: 指定使用多大内存</li>
+<li><code> --cpus=4</code>:指定cpu核心数</li>
+<li><code>--container-runtime='containerd'</code>:指定CRI(<code>docker</code>, <code>cri-o</code>, <code>containerd</code>)</li>
 </ul>
 <p><strong>查看安装是否成功</strong></p>
 <div class=highlight><div class=chroma>
