@@ -184,7 +184,7 @@ light
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title=创建日期>📅&nbsp;2022年02月09日 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title=阅读时长> ☕&nbsp;0&nbsp;分钟 </span>
+&nbsp;&#183;&nbsp; <span class=single__info title=阅读时长> ☕&nbsp;1&nbsp;分钟 </span>
 &nbsp;&#183;&nbsp; <span class=single__info title=作者>✍️&nbsp;ender viggin</span>
 <span class=single__info>
 &#183; 👀<span id=busuanzi_value_page_pv>...</span> 阅读
@@ -196,6 +196,26 @@ light
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
+<h2 id=terraform简介>terraform简介</h2>
+<p>Terraform 是一种安全有效地构建、更改和版本控制基础设施的工具(<strong>基础架构自动化的编排工具</strong>)。它的目标是 &ldquo;Write, Plan, and create Infrastructure as Code&rdquo;, 基础架构即代码。Terraform 几乎可以支持所有市面上能见到的云服务。具体的说就是可以用代码来管理维护 IT 资源，把之前需要手动操作的一部分任务通过程序来自动化的完成，这样的做的结果非常明显：高效、不易出错。</p>
+<p>Terraform 提供了对资源和提供者的灵活抽象。该模型允许表示从物理硬件、虚拟机和容器到电子邮件和 DNS 提供者的所有内容。由于这种灵活性，Terraform 可以用来解决许多不同的问题。这意味着有许多现有的工具与Terraform 的功能重叠。但是需要注意的是，Terraform 与其他系统并不相互排斥。它可以用于管理小到单个应用程序或达到整个数据中心的不同对象。</p>
+<p>Terraform 使用配置文件描述管理的组件(小到单个应用程序，达到整个数据中心)。Terraform 生成一个执行计划，描述它将做什么来达到所需的状态，然后执行它来构建所描述的基础结构。随着配置的变化，Terraform 能够确定发生了什么变化，并创建可应用的增量执行计划。</p>
+<h2 id=terraform核心功能>terraform核心功能</h2>
+<p><strong>基础架构即代码(Infrastructure as Code)</strong><br>
+使用高级配置语法来描述基础架构，这样就可以对数据中心的蓝图进行版本控制，就像对待其他代码一样对待它。</p>
+<p><strong>执行计划(Execution Plans)</strong><br>
+Terraform 有一个 plan 步骤，它生成一个执行计划。执行计划显示了当执行 apply 命令时 Terraform 将做什么。通过 plan 进行提前检查，可以使 Terraform 操作真正的基础结构时避免意外。</p>
+<p><strong>资源图(Resource Graph)</strong><br>
+Terraform 构建的所有资源的图表，它能够并行地创建和修改任何没有相互依赖的资源。因此，Terraform 可以高效地构建基础设施，操作人员也可以通过图表深入地解其基础设施中的依赖关系。</p>
+<p><strong>自动化变更(Change Automation)</strong><br>
+把复杂的变更集应用到基础设施中，而无需人工交互。通过前面提到的执行计划和资源图，我们可以确切地知道 Terraform 将会改变什么，以什么顺序改变，从而避免许多可能的人为错误。</p>
+<h2 id=terrform系列博客列表>terrform系列博客列表</h2>
+<ul>
+<li><strong>terraform安装</strong></li>
+<li><strong>terraform概念详解</strong></li>
+<li><strong>terraform语法详解</strong></li>
+<li><strong>terraform命令行详解</strong></li>
+</ul>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -337,7 +357,13 @@ light
 </label>
 </div>
 <div class="toc toc__outer" data-dir=ltr data-folding=true data-ani=true>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#terraform简介>terraform简介</a></li>
+<li><a href=#terraform核心功能>terraform核心功能</a></li>
+<li><a href=#terrform系列博客列表>terrform系列博客列表</a></li>
+</ul>
+</nav>
 </div>
 </div>
 </div>

@@ -184,7 +184,7 @@ light
 <div class=single__meta>
 <div class=single__infos>
 <time class=single__info title=创建日期>📅&nbsp;2022年02月09日 </time>
-&nbsp;&#183;&nbsp; <span class=single__info title=阅读时长> ☕&nbsp;0&nbsp;分钟 </span>
+&nbsp;&#183;&nbsp; <span class=single__info title=阅读时长> ☕&nbsp;1&nbsp;分钟 </span>
 &nbsp;&#183;&nbsp; <span class=single__info title=作者>✍️&nbsp;ender viggin</span>
 <span class=single__info>
 &#183; 👀<span id=busuanzi_value_page_pv>...</span> 阅读
@@ -196,6 +196,58 @@ light
 </ul>
 </div>
 <article class=single__contents data-dir=ltr data-ani=true>
+<h2 id=kafka简介>kafka简介</h2>
+<p>Kafka是一个分布式的，支持多分区、多副本，基于 Zookeeper 的分布式消息流平台，它同时也是一款开源的<strong>基于发布订阅模式的消息引擎系统</strong>。</p>
+<p><strong>kafka本质是一个MQ，MQ的优势</strong>：</p>
+<ul>
+<li><strong>解耦</strong>：允许我们独立的扩展或修改队列两边的处理过程。</li>
+<li><strong>可恢复性</strong>：即使一个处理消息的进程挂掉，加入队列中的消息仍然可以在系统恢复后被处理。</li>
+<li><strong>缓冲</strong>：有助于解决生产消息和消费消息的处理速度不一致的情况。</li>
+<li><strong>灵活性&峰值处理能力</strong>：不会因为突发的超负荷的请求而完全崩溃，消息队列能够使关键组件顶住突发的访问压力。</li>
+<li><strong>异步通信</strong>：消息队列允许用户把消息放入队列但不立即处理它。</li>
+</ul>
+<h3 id=kafka-的特性>Kafka 的特性</h3>
+<ul>
+<li><strong>高吞吐、低延迟</strong>：kakfa 最大的特点就是收发消息非常快，kafka 每秒可以处理几十万条消息，它的最低延迟只有几毫秒。</li>
+<li><strong>高伸缩性</strong>： 每个topic包含多个partition，主题中的分区可以分布在不同的broker中。</li>
+<li><strong>持久性、可靠性</strong>： Kafka 能够允许数据的持久化存储，消息被持久化到磁盘，并支持数据备份防止数据丢失，Kafka 底层的数据存储是基于 Zookeeper 存储的，Zookeeper 我们知道它的数据能够持久存储。</li>
+<li><strong>容错性</strong>： 允许集群中的节点失败，某个节点宕机，Kafka 集群能够正常工作</li>
+<li><strong>高并发</strong>： 支持数千个客户端同时读写</li>
+</ul>
+<h3 id=kafka基本概念>kafka基本概念</h3>
+<ul>
+<li><strong>Producer：</strong> 向主题发布消息的客户端应用程序称为<code>生产者</code>，生产者用于持续不断的向某个主题发送消息。</li>
+<li><strong>Consumer：</strong> 订阅主题消息的客户端程序称为<code>消费者</code>，消费者用于处理生产者产生的消息。</li>
+<li><strong>Consumer Group：</strong> 消费者组（CG），消费者组内每个消费者负责消费不同分区的数据，提高消费能力。一个分区只能由组内一个消费者消费，消费者组之间互不影响。所有的消费者都属于某个消费者组，即消费者组是逻辑上的一个订阅者。</li>
+<li><strong>Broker：</strong> 一台 Kafka 机器就是一个 broker。一个集群由多个 broker 组成。一个 broker 可以容纳多个 topic。</li>
+<li><strong>Topic：</strong> 可以理解为一个队列，topic 将消息分类，生产者和消费者面向的是同一个 topic。</li>
+<li><strong>Partition：</strong> 为了实现扩展性，提高并发能力，一个非常大的topic可以分布到多个 broker上，一个 topic 可以分为多个 partition，每个partition是一个有序的队列。</li>
+<li>**Replica：**副本，为实现备份的功能，保证集群中的某个节点发生故障时，该节点上的 partition 数据不丢失，且 Kafka 仍然能够继续工作，Kafka 提供了副本机制，一个 topic 的每个分区都有若干个副本，一个 leader 和若干个 follower。</li>
+<li><strong>Leader：</strong> 每个分区多个副本的“主”副本，生产者发送数据的对象，以及消费者消费数据的对象，都是 leader。</li>
+<li><strong>Follower：</strong> 每个分区多个副本的“从”副本，实时从 leader 中同步数据，保持和 leader 数据的同步。leader 发生故障时，某个 follower 还会成为新的 leader。</li>
+<li><strong>offset：</strong> 消费者消费的位置信息，监控数据消费到什么位置，当消费者挂掉再重新恢复的时候，可以从消费位置继续消费。</li>
+<li>**Zookeeper：**zookeeper 帮助 Kafka 存储和管理集群信息。</li>
+</ul>
+<h3 id=kafka架构图>kafka架构图</h3>
+<img src=https://image.evcoder.com/image/hugo/blog/kafka%E6%9E%B6%E6%9E%84%E5%9B%BE.png alt=kafka架构图 style=zoom:150%>
+<h3 id=kafka-的使用场景>Kafka 的使用场景</h3>
+<ul>
+<li><strong>活动跟踪</strong>：Kafka 可以用来跟踪用户行为。</li>
+<li><strong>传递消息</strong>：应用程序向用户发送通知就是通过传递消息来实现的，这些应用组件可以生成消息，而不需要关心消息的格式，也不需要关心消息是如何发送的。</li>
+<li><strong>度量指标</strong>：Kafka也经常用来记录运营监控数据。包括收集各种分布式应用的数据，生产各种操作的集中反馈，比如报警和报告。</li>
+<li><strong>日志记录</strong>：Kafka 的基本概念来源于提交日志，比如我们可以把数据库的更新发送到 Kafka 上，用来记录数据库的更新时间，通过kafka以统一接口服务的方式开放给各种consumer，例如hadoop、Hbase、Solr等。</li>
+<li><strong>流式处理</strong>：流式处理是有一个能够提供多种应用程序的领域。</li>
+<li><strong>限流削峰</strong>：Kafka 多用于互联网领域某一时刻请求特别多的情况下，可以把请求写入Kafka 中，避免直接请求后端程序导致服务崩溃。</li>
+</ul>
+<h2 id=kafka系列博客列表>kafka系列博客列表</h2>
+<ul>
+<li><strong>kafka集群部署</strong>
+<ul>
+<li><strong>helm部署kafka集群</strong></li>
+</ul>
+</li>
+<li><strong>kafka命令行详解</strong></li>
+</ul>
 </article>
 <script defer src=/js/clipboard.min.1626706afc88d95ebe1173b553ec732c6dc82a576989315fdf5e7779af738a44.js></script>
 <script defer src=/js/helper/prev.min.js></script>
@@ -337,7 +389,19 @@ light
 </label>
 </div>
 <div class="toc toc__outer" data-dir=ltr data-folding=true data-ani=true>
-<nav id=TableOfContents></nav>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#kafka简介>kafka简介</a>
+<ul>
+<li><a href=#kafka-的特性>Kafka 的特性</a></li>
+<li><a href=#kafka基本概念>kafka基本概念</a></li>
+<li><a href=#kafka架构图>kafka架构图</a></li>
+<li><a href=#kafka-的使用场景>Kafka 的使用场景</a></li>
+</ul>
+</li>
+<li><a href=#kafka系列博客列表>kafka系列博客列表</a></li>
+</ul>
+</nav>
 </div>
 </div>
 </div>
